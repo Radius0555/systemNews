@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Zmodyfikuj Artykuł{% endblock %}
+
+{% block body %}
+<style>
+th, td {
+  padding: 10px;
+}
+th {
+  text-align: left;
+}
+</style>
+
+<h1>Edytuj Artykuł</h1>
+
+{{ form(form) }}
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Artykuły{% endblock %}
+
+{% block body %}
+
+<h1>Artykuły</h1>
+
+{% if paginations is not empty %}
+<div class="row">
+    <ul class="list group list-group-flush">
+        {% for article in paginations %}
+        <li class="list-group-item">
+            <div class="card-body">
+                <div class="row no-gutters">
+                    <div class="col-md-3">Foto</div>
+                    <div class="col-md-7 ml-md-auto">
+                        <a href="home/{{ article.id }}"
+                            <h5>{{ article.title }}</h5>
+                        </a>
+                        <p>Kategoria, data, ilość komentarzy</p>
+                    </div>        
+                </div>
+            </div>
+        </li>
+        {% endfor %}        
+    </ul>
+</div>
+{% else %}
+    <p>Brak artykułów!</p>
+{% endif %}
+    
+{% endblock %}

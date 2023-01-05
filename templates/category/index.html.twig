@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Kategorie{% endblock %}
+
+{% block body %}
+<style>
+th, td {
+  padding: 10px;
+}
+th {
+  text-align: left;
+}
+</style>
+
+<a href="/admin/article">Artykuły</a>
+<h1>Wszystkie kategorie</h1>
+<a href="{{ path('category_create') }}" class="btn btn-success">Utwórz kategorie</a>
+{% if categories is not empty %}
+<table class="table table-bordered">
+  <thead>
+    <tr>
+    <th>Nazwa</th>
+    <th>Edytuj</th>
+    <th>Usuń</th>
+  </tr>
+</thead>
+<tbody>
+  {% for category in categories %}
+  <tr>
+    <td>
+      {{ category.name }}
+    </td>
+    <td><a href="/category/update/{{ category.id }}">
+      <i class="bi bi-wrench"></i>
+    </a></td>
+    <td><a href="/category/delete/{{ category.id }}">
+      <i class="bi bi-trash"></i>
+    </a></td> 
+  </tr>
+  {% endfor %}
+  </tbody>
+
+{% else %}
+  <p>Brak kategorii!</p>
+{% endif %}
+
+{% endblock %}

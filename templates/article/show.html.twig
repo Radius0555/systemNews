@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Wybrany Artykuł{% endblock %}
+
+{% block body %}
+<style>
+th, td {
+  padding: 10px;
+}
+th {
+  text-align: left;
+}
+</style>
+
+<h1>Artykuł</h1>
+
+<article>
+  <p>Kategoria: {{ article.category.name }}</p>
+  <h2>{{ article.title }}</h2>
+  <p> {{ article.date|date('H:i d.m.Y') }} </p>
+  <p> {{ article.image }} </p>
+  <p> {{ article.contentBig }} </p>
+  <p> {{ article.content }} </p>
+</article>
+<hr>
+<h5>Komentarze: </h5>
+
+
+{% if article.comments is not empty %}
+
+{% for comment in article.comments|sort((a,b) => a.id < b.id) %}
+<ul>
+    <li>Użytkownik: {{ comment.author }}</li>
+    <li>Komentarz: {{ comment.content }}</li>
+    {% if (is_granted('ROLE_ADMIN') or (app.user and app.user.email == comment.author)) %}
+        <li><a href="comment/delete/{{ comment.id }}">
+            <i class="bi bi-trash"></i></a></li>
+    {% endif %}
+</ul>
+{% endfor %}
+</table>
+
+{% else %}
+<p>Brak komentarzy</p>
+{% endif %}
+
+{% endblock %}

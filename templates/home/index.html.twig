@@ -1,0 +1,22 @@
+{% extends 'home/base.html.twig' %}
+
+{% block title %}System News{% endblock %}
+
+{% block body %}
+
+{% if articles is not empty %}
+<div class="row">
+    {% for article in articles %}
+        <div class="col-6">
+            <img src="{{ asset('uploads/imageNews/' ~ article.image) }}" class="img-fluid">
+            <div class="bottom-left">
+                <a href="home/{{ article.id }}">{{ article.title }}</a>
+            </div>
+        </div>
+    {% endfor %}        
+</div>
+{% else %}
+    <p>Brak artykułów!</p>
+{% endif %}
+
+{% endblock %}

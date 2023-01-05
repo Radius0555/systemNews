@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Kreator Artykułów{% endblock %}
+
+{% block body %}
+<style>
+th, td {
+  padding: 10px;
+}
+th {
+  text-align: left;
+}
+</style>
+
+<h1>Utwórz Artykuł</h1>
+
+{{ form(form) }}
+
+{% endblock %}

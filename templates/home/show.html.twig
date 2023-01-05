@@ -1,0 +1,49 @@
+{% extends 'home/base.html.twig' %}
+
+{% block title %}Wybrany artykuł{% endblock %}
+
+{% block body %}
+
+<h1>Artykuł</h1>
+
+<article>
+    <p>Kategoria: {{ article.category.name }}</p>
+    <h2>{{ article.title }}</h2>
+    <p>{{ article.date |date('d-m-Y')}}</p>
+    <img src="{{ asset('uploads/imageNews/' ~ article.image) }}" class="img-fluid">
+    <p>{{ article.contentBig }}</p>
+    <p>{{ article.content }}</p>
+</article>
+<hr>
+<h5>Komentarze:</h5>
+
+{% if app.user %}
+
+Użytkownik: {{ app.user.email }}
+
+{{ form(form) }}
+
+{% endif %}
+
+{% if article.comments is not empty %}
+
+{% for comment in article.comments|sort((a,b) => a.id < b.id) %}
+<ul>
+    <li>Użytkownik: {{ comment.author }}</li>
+    <li>Komentarz: {{ comment.content }}</li>
+    {% if (is_granted('ROLE_ADMIN') or (app.user and app.user.email == comment.author)) %}
+        <li><a href="comment/delete/{{ comment.id }}">
+            <i class="bi bi-trash"></i></a></li>
+    {% endif %}
+</ul>
+{% endfor %}
+
+{% else %}
+
+<h3>Brak komentarzy!</h3>
+
+{% endif %}
+
+
+
+{% endblock %}
